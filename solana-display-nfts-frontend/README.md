@@ -3,6 +3,9 @@
 
 The Solana dApp Scaffold repos are meant to house good starting scaffolds for ecosystem developers to get up and running quickly with a front end client UI that integrates several common features found in dApps with some basic usage examples. Wallet Integration. State management. Components examples. Notifications. Setup recommendations.
 
+![image](https://user-images.githubusercontent.com/30844607/207661351-5786dbd3-a249-4454-8d76-854d891fa381.png)
+
+
 Responsive                     |  Desktop
 :-------------------------:|:-------------------------:
 ![](scaffold-mobile.png)  |  ![](scaffold-desktop.png)
