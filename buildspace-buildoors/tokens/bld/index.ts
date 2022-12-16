@@ -26,7 +26,7 @@ async function createBldToken(
   connection: web3.Connection,
   payer: web3.Keypair
 ) {
-
+    // This will create a token with all the necessary inputs
     const tokenMint = await token.createMint(
         connection, // Connection
         payer, // Payer
@@ -35,6 +35,7 @@ async function createBldToken(
         2 // Decimals
     );
 
+    // Create a metaplex object so that we can create a metaplex metadata
     const metaplex = Metaplex.make(connection)
         .use(keypairIdentity(payer))
         .use(
@@ -45,10 +46,12 @@ async function createBldToken(
         })
         );
 
-    const imageBuffer = fs.readFileSync(TOKEN_IMAGE_PATH);//token_image_path
+    // Read image file
+    const imageBuffer = fs.readFileSync(TOKEN_IMAGE_PATH);
     const file = toMetaplexFile(imageBuffer, TOKEN_IMAGE_NAME);
     const imageUri = await metaplex.storage().upload(file);
 
+    // Upload the rest of offchain metadata
     const { uri } = await metaplex
         .nfts()
         .uploadMetadata({
@@ -56,7 +59,9 @@ async function createBldToken(
         description: TOKEN_DESCRIPTION,
         image: imageUri,
         })
+        .run();
 
+    // Finding out the address where the metadata is stored
     const metadataPda = findMetadataPda(tokenMint);
     const tokenMetadata = {
         name: TOKEN_NAME,
